@@ -92,7 +92,7 @@ const ClientDashboardOS = () => {
     const styles = {
       urgent: 'border-red-500/50 bg-red-500/10',
       action: 'border-yellow-500/40 bg-yellow-500/5',
-      info: 'border-signal/30 bg-blue-500/5'
+      info: 'border-signal/30 bg-signal/5'
     };
     return styles[priority] || styles.info;
   };
@@ -100,13 +100,13 @@ const ClientDashboardOS = () => {
   const getPriorityIcon = (priority) => {
     if (priority === 'urgent') return <AlertTriangle className="w-5 h-5 text-red-400" />;
     if (priority === 'action') return <Clock className="w-5 h-5 text-yellow-400" />;
-    return <CheckCircle2 className="w-5 h-5 text-blue-400" />;
+    return <CheckCircle2 className="w-5 h-5 text-signal" />;
   };
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" data-testid="client-dashboard-os-loading">
-        <div className="w-8 h-8 border-2 border-border border-t-blue-500 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-border border-t-signal rounded-full animate-spin" />
       </div>
     );
   }
@@ -187,7 +187,7 @@ const ClientDashboardOS = () => {
                   ? 'bg-red-500/15 border-red-500/40'
                   : alert.severity === 'high'
                   ? 'bg-yellow-500/10 border-yellow-500/30'
-                  : 'bg-blue-500/10 border-signal/30'
+                  : 'bg-signal/10 border-signal/30'
               }`}
               data-testid={`alert-${alert.type}`}
             >
@@ -292,16 +292,16 @@ const ClientDashboardOS = () => {
                   <div className="flex items-start gap-3 flex-1">
                     <div className="mt-1">
                       {action.type === 'approve_deliverable' && (
-                        <FileText className="w-5 h-5 text-blue-400" />
+                        <FileText className="w-5 h-5 text-signal" />
                       )}
                       {action.type === 'pay_invoice' && (
                         <DollarSign className="w-5 h-5 text-green-400" />
                       )}
                       {action.type === 'approve_estimate' && (
-                        <Clock className="w-5 h-5 text-purple-400" />
+                        <Clock className="w-5 h-5 text-signal" />
                       )}
                       {action.type === 'suggestion' && (
-                        <TrendingUp className="w-5 h-5 text-blue-400" />
+                        <TrendingUp className="w-5 h-5 text-signal" />
                       )}
                     </div>
 
@@ -344,7 +344,7 @@ const ClientDashboardOS = () => {
                     </div>
                   </div>
 
-                  <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-blue-400 group-hover:translate-x-1 transition-all mt-1" />
+                  <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-signal group-hover:translate-x-1 transition-all mt-1" />
                 </div>
               </div>
             ))}
@@ -357,7 +357,7 @@ const ClientDashboardOS = () => {
         {/* Projects */}
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2 mb-4">
-            <FolderKanban className="w-5 h-5 text-blue-400" />
+            <FolderKanban className="w-5 h-5 text-signal" />
             <h2 className="text-lg font-semibold text-foreground">Active Projects</h2>
           </div>
 
@@ -380,7 +380,7 @@ const ClientDashboardOS = () => {
                   <div className="flex items-center justify-between mb-3">
                     <div className="text-white font-medium">{project.name}</div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">
+                      <span className="text-xs bg-signal/15 text-signal px-2 py-1 rounded">
                         {project.status}
                       </span>
                     </div>
@@ -440,7 +440,7 @@ const ClientDashboardOS = () => {
 
             <button
               onClick={() => navigate('/client/billing-os')}
-              className="w-full mt-4 bg-blue-500/10 hover:bg-blue-500/20 border border-signal/30 text-blue-400 py-2 rounded-lg text-sm font-medium transition-all"
+              className="w-full mt-4 bg-signal/10 hover:bg-signal/15 border border-signal/30 text-signal py-2 rounded-lg text-sm font-medium transition-all"
               data-testid="view-billing-btn"
             >
               View All Invoices

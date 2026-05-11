@@ -68,19 +68,15 @@ const ClientDashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-white/10 border-t-blue-500 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-white/10 border-t-signal rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen p-8" data-testid="client-dashboard">
-      {/* Background glow */}
-      <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[150px] pointer-events-none" />
-      
       {/* Header */}
       <div className="relative mb-10">
-        <div className="absolute -top-8 -left-8 w-32 h-32 bg-blue-600/10 rounded-full blur-3xl" />
         <h1 className="text-3xl font-semibold tracking-tight text-white relative">
           Welcome back, <span className="text-signal">{user?.name?.split(' ')[0] || 'Client'}</span>
         </h1>
@@ -156,7 +152,7 @@ const ClientDashboard = () => {
           <div className="rounded-2xl border border-white/10 bg-[#1A1A23] overflow-hidden">
             <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <FolderKanban className="w-5 h-5 text-blue-400" />
+                <FolderKanban className="w-5 h-5 text-signal" />
                 <h2 className="font-semibold">Active Projects</h2>
               </div>
               <button 
@@ -177,7 +173,7 @@ const ClientDashboard = () => {
                   <p className="text-sm text-white/40 mb-6">Start your first project request</p>
                   <button
                     onClick={() => navigate('/client/request/new')}
-                    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-medium px-6 py-3 rounded-xl transition-all shadow-lg shadow"
+                    className="inline-flex items-center gap-2 bg-signal hover:bg-signal/90 text-substrate font-medium px-6 py-3 rounded-xl transition-all"
                   >
                     <Plus className="w-4 h-4" />
                     New Project
@@ -273,7 +269,7 @@ const ClientDashboard = () => {
 // Stat Card Component
 const StatCard = ({ label, value, icon, color, highlight }) => {
   const colors = {
-    blue: 'text-blue-400',
+    blue: 'text-signal',
     amber: 'text-amber-400',
     emerald: 'text-emerald-400',
     white: 'text-white/50'
@@ -311,7 +307,7 @@ const ProjectCard = ({ project, onClick, progress }) => (
           {project.status}
         </span>
       </div>
-      <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-blue-400 transition-colors" />
+      <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-signal transition-colors" />
     </div>
     <div className="flex items-center gap-3">
       <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
@@ -331,7 +327,7 @@ const QuickAction = ({ icon, label, onClick }) => (
     onClick={onClick}
     className="w-full flex items-center gap-3 p-4 rounded-xl text-left text-white/60 hover:text-white hover:bg-white/5 transition-all group"
   >
-    <span className="text-white/40 group-hover:text-blue-400 transition-colors">{icon}</span>
+    <span className="text-white/40 group-hover:text-signal transition-colors">{icon}</span>
     <span className="text-sm font-medium">{label}</span>
   </button>
 );

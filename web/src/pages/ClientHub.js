@@ -81,10 +81,6 @@ const ClientHub = () => {
       {/* Hero Section */}
       <section className="mb-12">
         <div className="rounded-3xl bg-card border border-border p-10 relative overflow-hidden">
-          {/* Glow Effect */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-violet-500/10 rounded-full blur-[100px] pointer-events-none" />
-          
           <div className="relative">
             <div className="flex items-center gap-2 mb-6">
               <div className="w-8 h-8 rounded-lg bg-signal flex items-center justify-center">
@@ -108,10 +104,10 @@ const ClientHub = () => {
                 value={idea}
                 onChange={(e) => setIdea(e.target.value)}
                 placeholder="Опишите вашу идею подробно: что за продукт, для кого, какие ключевые функции, какие интеграции нужны, примеры аналогов..."
-                className={`w-full h-52 bg-background border-2 rounded-2xl px-6 py-5 text-foreground placeholder:text-muted-foreground focus:outline-none resize-none text-base leading-relaxed transition-all caret-blue-400 selection:bg-blue-500/30 ${
+                className={`w-full h-52 bg-background border-2 rounded-2xl px-6 py-5 text-foreground placeholder:text-muted-foreground focus:outline-none resize-none text-base leading-relaxed transition-all caret-signal selection:bg-signal/20 ${
                   idea.length > 0 && !isValidIdea 
-                    ? 'border-amber-500/60 focus:border-amber-400 focus:shadow-[0_0_20px_rgba(245,158,11,0.15)]' 
-                    : 'border-border focus:border-blue-500 focus:shadow-[0_0_30px_rgba(59,130,246,0.2)]'
+                    ? 'border-amber-500/60 focus:border-amber-400' 
+                    : 'border-border focus:border-signal/40'
                 }`}
                 data-testid="idea-input"
               />
@@ -181,7 +177,7 @@ const ClientHub = () => {
         <section className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold flex items-center gap-2">
-              <Zap className="w-5 h-5 text-blue-400" />
+              <Zap className="w-5 h-5 text-signal" />
               Active Project
             </h2>
           </div>
@@ -193,10 +189,10 @@ const ClientHub = () => {
           >
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h3 className="text-xl font-semibold group-hover:text-blue-400 transition-colors">{activeProject.name}</h3>
+                <h3 className="text-xl font-semibold group-hover:text-signal transition-colors">{activeProject.name}</h3>
                 <ProjectStatus status={activeProject.current_stage || activeProject.status} />
               </div>
-              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-signal group-hover:translate-x-1 transition-all" />
             </div>
             
             <ProjectProgress stage={activeProject.current_stage} />
@@ -237,7 +233,7 @@ const ClientHub = () => {
       {!loading && projects.length === 0 && !newProjectId && (
         <section className="rounded-2xl bg-[#151922] border border-border p-12 text-center">
           <div className="w-16 h-16 rounded-2xl bg-signal/10 mx-auto mb-6 flex items-center justify-center">
-            <Sparkles className="w-8 h-8 text-blue-400" />
+            <Sparkles className="w-8 h-8 text-signal" />
           </div>
           <h3 className="text-xl font-semibold mb-2">You haven't built anything yet</h3>
           <p className="text-muted-foreground mb-6 max-w-md mx-auto">
@@ -292,26 +288,26 @@ const ClientHub = () => {
 
 const FeaturePill = ({ icon, text }) => (
   <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted border border-border">
-    <span className="text-blue-400">{icon}</span>
+    <span className="text-signal">{icon}</span>
     <span className="text-sm text-muted-foreground">{text}</span>
   </div>
 );
 
 const ProjectStatus = ({ status }) => {
   const config = {
-    discovery: { label: 'AI structuring...', color: 'text-violet-400', animate: true },
-    scope: { label: 'Scope ready', color: 'text-blue-400' },
-    design: { label: 'In design', color: 'text-cyan-400' },
+    discovery: { label: 'AI structuring...', color: 'text-signal', animate: true },
+    scope: { label: 'Scope ready', color: 'text-signal' },
+    design: { label: 'In design', color: 'text-signal' },
     development: { label: 'In development', color: 'text-emerald-400' },
     qa: { label: 'Quality check', color: 'text-amber-400' },
-    delivery: { label: 'Ready for delivery', color: 'text-green-400' },
+    delivery: { label: 'Ready for delivery', color: 'text-emerald-400' },
     completed: { label: 'Completed', color: 'text-emerald-400' },
-    active: { label: 'Active', color: 'text-blue-400' },
+    active: { label: 'Active', color: 'text-signal' },
   }[status] || { label: status, color: 'text-muted-foreground' };
 
   return (
     <div className={`flex items-center gap-2 mt-1 text-sm ${config.color}`}>
-      {config.animate && <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />}
+      {config.animate && <span className="w-2 h-2 rounded-full bg-signal animate-pulse" />}
       {config.label}
     </div>
   );
@@ -349,7 +345,7 @@ const ProjectCard = ({ project, onClick }) => {
       className="w-full text-left p-4 rounded-xl bg-[#151922] border border-border hover:border-border hover:bg-[#1a1f2a] transition-all group flex items-center gap-4"
     >
       <div className="flex-1 min-w-0">
-        <h4 className="font-medium truncate group-hover:text-blue-400 transition-colors">{project.name}</h4>
+        <h4 className="font-medium truncate group-hover:text-signal transition-colors">{project.name}</h4>
         <p className="text-sm text-muted-foreground capitalize">{project.current_stage}</p>
       </div>
       <div className="w-24">
@@ -360,7 +356,7 @@ const ProjectCard = ({ project, onClick }) => {
           />
         </div>
       </div>
-      <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-blue-400 transition-colors" />
+      <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-signal transition-colors" />
     </button>
   );
 };

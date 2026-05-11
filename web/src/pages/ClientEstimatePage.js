@@ -74,7 +74,7 @@ const ClientEstimatePage = () => {
       {/* Header */}
       <div className="text-center">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-signal/10 mb-4">
-          <Calculator className="w-8 h-8 text-purple-400" />
+          <Calculator className="w-8 h-8 text-signal" />
         </div>
         <h1 className="text-3xl font-bold">Instant Project Estimate</h1>
         <p className="text-white/50 mt-2 max-w-lg mx-auto">
@@ -139,9 +139,9 @@ const ClientEstimatePage = () => {
             
             {/* Smart pricing badge */}
             {smartEstimate && (
-              <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-signal/30">
-                <Brain className="w-3.5 h-3.5 text-purple-400" />
-                <span className="text-xs text-purple-300">
+              <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-signal/10 border border-signal/30">
+                <Brain className="w-3.5 h-3.5 text-signal" />
+                <span className="text-xs text-signal">
                   Based on {smartEstimate.estimate?.template_name} template 
                   · {(smartEstimate.estimate?.confidence * 100).toFixed(0)}% confidence
                 </span>
@@ -158,7 +158,7 @@ const ClientEstimatePage = () => {
                 data-testid="why-this-price-btn"
               >
                 <div className="flex items-center gap-2">
-                  <Info className="w-5 h-5 text-purple-400" />
+                  <Info className="w-5 h-5 text-signal" />
                   <h3 className="font-semibold">Why this price?</h3>
                 </div>
                 {showExplain ? <ChevronUp className="w-5 h-5 text-zinc-500" /> : <ChevronDown className="w-5 h-5 text-zinc-500" />}
@@ -168,7 +168,7 @@ const ClientEstimatePage = () => {
                 <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div className="p-4 rounded-xl bg-black/30 border border-white/5">
                     <div className="flex items-center gap-2 mb-2">
-                      <Clock className="w-4 h-4 text-blue-400" />
+                      <Clock className="w-4 h-4 text-signal" />
                       <span className="text-xs text-zinc-400">Estimated Hours</span>
                     </div>
                     <div className="text-xl font-bold text-white">{smartEstimate.estimate?.avg_hours}h</div>

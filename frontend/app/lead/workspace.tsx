@@ -110,7 +110,7 @@ export default function LeadWorkspace() {
       <View style={s.center}>
         <Ionicons name="alert-circle-outline" size={36} color={T.textMuted} />
         <Text style={s.errorText}>{error || 'Plan not found'}</Text>
-        <TouchableOpacity style={s.backBtn} onPress={() => router.replace('/' as any)}>
+        <TouchableOpacity style={s.backBtn} onPress={() => router.replace('/describe' as any)}>
           <Text style={s.backBtnText}>Start a new plan</Text>
         </TouchableOpacity>
       </View>
@@ -236,7 +236,7 @@ export default function LeadWorkspace() {
       <TouchableOpacity
         testID="lead-back-new"
         style={s.tinyBtn}
-        onPress={() => router.replace('/' as any)}
+        onPress={() => router.replace('/describe' as any)}
       >
         <Text style={s.tinyBtnText}>← Describe a different product</Text>
       </TouchableOpacity>

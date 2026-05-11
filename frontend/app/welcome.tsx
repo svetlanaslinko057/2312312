@@ -54,7 +54,21 @@ const F = {
   mono:        'JetBrainsMono_500Medium',
 } as const;
 
-const EVAX_LOGO = require('../assets/images/evax-logo-light.png');
+/**
+ * Brand mark selector — substrate-aware.
+ *
+ * The asset filenames are misleading: `evax-logo.png` is the WHITE
+ * wordmark (for dark substrate), and `evax-logo-light.png` is the BLACK
+ * wordmark (for "light theme" — i.e. paper substrate). We resolve the
+ * correct asset off the active theme so the brand mark never inverts
+ * into the substrate.
+ */
+function useBrandLogo() {
+  const { theme } = useTheme();
+  return theme === 'dark'
+    ? require('../assets/images/evax-logo.png')         // white logo → dark bg
+    : require('../assets/images/evax-logo-light.png');  // black logo → light bg
+}
 
 /* ---------- CTA — single implementation, theme-reactive ---------- */
 
@@ -161,7 +175,7 @@ export default function WelcomeScreen() {
   const onStart = () => {
     markWelcomeSeenForSession();
     markJustLeftWelcome();
-    router.replace('/' as any);
+    router.replace('/describe' as any);
   };
 
   const onLogin = () => {
@@ -191,7 +205,7 @@ export default function WelcomeScreen() {
       {/* Brand mark — canonical PNG. Never text. Do not refactor. */}
       <View style={s.brand} testID="welcome-brand">
         <Image
-          source={EVAX_LOGO}
+          source={useBrandLogo()}
           style={s.brandLogo}
           resizeMode="contain"
           accessibilityLabel="EVA-X"

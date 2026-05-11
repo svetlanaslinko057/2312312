@@ -180,7 +180,7 @@ export default function EstimateResult() {
     return (
       <View style={s.errorWrap}>
         <Text style={s.errorText}>Estimate expired.</Text>
-        <PressScale style={s.backBtn} onPress={() => router.replace('/' as any)}>
+        <PressScale style={s.backBtn} onPress={() => router.replace('/describe' as any)}>
           <Text style={s.backBtnText}>Start a new plan</Text>
         </PressScale>
       </View>

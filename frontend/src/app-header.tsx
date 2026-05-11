@@ -7,6 +7,7 @@ import { useAuth } from './auth';
 import { useMe } from './use-me';
 import { resolveUserEntry } from './resolve-entry';
 import AlertsSheet, { useAlerts } from './alerts-sheet';
+import { useTheme } from './theme-context';
 import T from './theme';
 
 /**
@@ -51,9 +52,10 @@ const ROLE_CABINETS = new Set(['client', 'developer', 'admin']);
 // On these we show a bare header: brand only, no title, no Login button.
 // The visitor screens each have their own inline login link.
 const VISITOR_SEGMENTS = new Set([
-  '',          // `/` — index.tsx
+  '',          // `/` — index.tsx (redirect-only)
   'index',
   'welcome',   // welcome surface — bare header (brand only, no title, no icons)
+  'describe',  // describe-your-product surface — carries its own brand mark
   'auth',
   'estimate-result',
   'estimate-improve',
@@ -78,6 +80,13 @@ export default function AppHeader() {
   const insets = useSafeAreaInsets();
   const { user } = useAuth();
   const { me } = useMe();
+  const { theme } = useTheme();
+  // Asset filenames are reversed: `evax-logo.png` is the WHITE wordmark,
+  // `evax-logo-light.png` is the BLACK wordmark. Pick the right one off
+  // the active theme so the brand never disappears into the substrate.
+  const brandLogo = theme === 'dark'
+    ? require('../assets/images/evax-logo.png')
+    : require('../assets/images/evax-logo-light.png');
 
   const firstSeg = (segments[0] || '') as string;
   const isVisitorSurface = !user && VISITOR_SEGMENTS.has(firstSeg);
@@ -91,7 +100,7 @@ export default function AppHeader() {
   // Rules of Hooks. The `shouldHide` flag captures the suppression intent
   // and is applied at render time.
   const shouldHide =
-    (firstSeg === 'welcome' || firstSeg === '' || firstSeg === 'index') && !user;
+    (firstSeg === 'welcome' || firstSeg === 'describe' || firstSeg === '' || firstSeg === 'index') && !user;
 
   const title = useMemo(() => (isVisitorSurface ? '' : titleFor(firstSeg)), [firstSeg, isVisitorSurface]);
   // Hide the context badge (CLIENT / DEV / ADMIN) on role cabinets — the active
@@ -126,7 +135,7 @@ export default function AppHeader() {
           activeOpacity={0.7}
         >
           <Image
-            source={require('../assets/images/evax-logo-light.png')}
+            source={brandLogo}
             style={s.brandImg}
             resizeMode="contain"
             accessibilityLabel="EVA-X"

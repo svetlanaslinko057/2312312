@@ -88,6 +88,47 @@ substrate-side or via narrow surgical edits.
 - 86 mobile screens still contain inline `#hex` strings (e.g. `admin/execution-console.tsx` has full local palette)
 - 326 `bg-emerald-*` + 265 `bg-zinc-*` + 48 `bg-slate-*` Tailwind utility usages in web — currently auto-mapped to sage/graphite via tailwind config, but should be migrated to semantic class names
 
+## Phase 1.5b — Dialect breach closure (May-2026, surgical pass)
+
+After Phase 1.5 verification, substrate-grep on the 6 named files surfaced
+9 remaining blue-language leaks the previous regex-driven sweep missed.
+Per architectural distinction (`inline hex = infrastructure debt` vs
+`blue/purple dialect = identity fracture`), these were closed as dialect-
+breach, not as Phase 3 codemod.
+
+**9 surgical edits, strict scope (no opportunistic cleanup):**
+
+1. `ClientCabinet.js:53` — Loader2 `text-blue-500` → `text-signal`
+2. `ClientCabinet.js:82` — `bg-blue-500/5 blur-[100px]` AI-glow halo **removed entirely** (not recolored to sage glow — the halo motif itself was the leak)
+3. `ClientCabinet.js:149` — `bg-blue-500/20` → `bg-signal/15` (next_action review container)
+4. `ClientCabinet.js:152` — `text-blue-400` → `text-signal` (Package icon)
+5. `ClientCabinet.js:209` — `text-blue-400` → `text-signal` (CheckCircle2 header icon)
+6. `ClientCabinet.js:215` — `text-blue-400/60` → `text-signal/60` (CheckCircle2 row icon)
+7. `ClientCabinet.js:229` — `text-blue-400` → `text-signal` (under-review counter)
+8. `ClientLayout.js:86` — `bg-blue-500/20` → `bg-signal/15` (nav badge)
+9. `ClientProjectPage.js:245` + `ClientProjectWorkspaceOS.js:150` — `bg-gradient-to-r from-blue-500 to-{cyan,green}-500` progress bars → **single restrained signal fill** `bg-signal` (operational systems don't need "energetic progress motion")
+
+**Architectural decisions reinforced:**
+- Glow halos NEVER recolored — removed. Substrate doesn't need decorative atmosphere; warmth lives in paper luminance, spacing, typography, sage emphasis, silence.
+- Progress bars are single-color signal fill. No gradient direction = no implicit "energy flow" reading.
+- `bg-signal/15` is the canonical low-pressure sage tint for badges/icon containers (replaces all `bg-blue-500/20` icon-tint instances).
+
+**Verified by post-fix substrate-grep:**
+- `ClientCabinet.js` → 0 blue refs (was 7)
+- `ClientLayout.js` → 0 blue refs (was 1)
+- Listed progress-bar lines in `ClientProjectPage.js:245` and `ClientProjectWorkspaceOS.js:150` → cleaned
+- Web rebuild: ✅ 496.64 kB JS, 23.64 kB CSS, no errors
+
+**Still outside surgical scope (NOT touched per "no creep" discipline):**
+`ClientProjectPage.js` retains 19 blue refs on lines OTHER than 245
+(254, 287, 314, 320, 399, 407, 628, 672, 904, 905…), and
+`ClientProjectWorkspaceOS.js` retains 6 (103, 163, 188, 218, 262, 316).
+These are same-class dialect leaks. Per architectural rule they should
+NOT be deferred to Phase 3 codemod (which targets infrastructure debt
+only). Decision required: either expand surgical scope in a 1.5c pass,
+or accept them as known-dialect-residue with explicit risk acknowledgment
+before Phase 2 opens.
+
 ## Access points (current pod)
 - Mobile (Expo Web): https://ca52717f-8dc0-4c64-82ad-8435338baff8.preview.emergentagent.com/
 - Web platform: https://ca52717f-8dc0-4c64-82ad-8435338baff8.preview.emergentagent.com/api/web-ui/

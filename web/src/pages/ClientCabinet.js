@@ -50,7 +50,7 @@ const ClientCabinet = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+        <Loader2 className="w-8 h-8 text-signal animate-spin" />
       </div>
     );
   }
@@ -79,7 +79,7 @@ const ClientCabinet = () => {
       {/* HERO BLOCK */}
       <section className="mb-8" data-testid="project-hero">
         <div className="rounded-2xl bg-gradient-to-br from-[#111827] to-[#0c1015] border border-zinc-800 p-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-80 h-80 pointer-events-none" />
           <div className="relative">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -146,10 +146,10 @@ const ClientCabinet = () => {
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
                   next_action.type === 'pay' ? 'bg-amber-500/20' :
-                  next_action.type === 'review' ? 'bg-blue-500/20' : 'bg-zinc-800'
+                  next_action.type === 'review' ? 'bg-signal/15' : 'bg-zinc-800'
                 }`}>
                   {next_action.type === 'pay' ? <CreditCard className="w-5 h-5 text-amber-400" /> :
-                   next_action.type === 'review' ? <Package className="w-5 h-5 text-blue-400" /> :
+                   next_action.type === 'review' ? <Package className="w-5 h-5 text-signal" /> :
                    next_action.type === 'complete' ? <Sparkles className="w-5 h-5 text-emerald-400" /> :
                    <Clock className="w-5 h-5 text-zinc-500" />}
                 </div>
@@ -206,13 +206,13 @@ const ClientCabinet = () => {
             {workspace.recent_completed.length > 0 && (
               <div className="bg-zinc-900/60 border border-zinc-800 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-3">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-signal" />
                   <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500">Recently Done</h3>
                 </div>
                 <div className="space-y-2">
                   {workspace.recent_completed.map(task => (
                     <div key={task.unit_id} className="flex items-center gap-2 text-sm">
-                      <CheckCircle2 className="w-3 h-3 text-blue-400/60" />
+                      <CheckCircle2 className="w-3 h-3 text-signal/60" />
                       <span className="text-zinc-400">{task.title}</span>
                     </div>
                   ))}
@@ -226,7 +226,7 @@ const ClientCabinet = () => {
             <div className="mt-3 flex items-center gap-3 text-xs text-zinc-500">
               <span>{workspace.done_tasks}/{workspace.total_tasks} tasks completed</span>
               {workspace.under_review.length > 0 && (
-                <span className="text-blue-400">{workspace.under_review.length} under review</span>
+                <span className="text-signal">{workspace.under_review.length} under review</span>
               )}
             </div>
           )}

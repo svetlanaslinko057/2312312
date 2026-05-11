@@ -147,7 +147,7 @@ const ClientProjectWorkspaceOS = () => {
           </div>
           <div className="h-2 bg-white/5 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-blue-500 to-green-500 transition-all"
+              className="h-full bg-signal transition-all"
               style={{ width: `${project.progress}%` }}
             />
           </div>

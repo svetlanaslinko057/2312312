@@ -129,6 +129,70 @@ only). Decision required: either expand surgical scope in a 1.5c pass,
 or accept them as known-dialect-residue with explicit risk acknowledgment
 before Phase 2 opens.
 
+## Phase 1.5c — Interaction-semantics dialect closure (May-2026)
+
+After 1.5b substrate-grep flagged 25 additional dialect refs in two
+project-surface files, scope was explicitly expanded (user decision)
+because: `border-blue-500 / ring-blue-500/X / focus:border-blue-500/X`
+is **interaction semantics** (active state, focus state, current-step
+gravity) — a heavier class of leak than decorative color. Leaving these
+means the system continues to "think in the old dialect" during the
+exact moments of interaction, which carries more substrate weight than
+cosmetic residue.
+
+**16 surgical edits across 2 files, strict scope (no opportunistic cleanup):**
+
+`ClientProjectPage.js` (10 edits):
+1. `:254` — ArrowRight `text-blue-400` → `text-signal`
+2. `:287` — Activity icon `text-blue-400` → `text-signal`
+3. `:314` — current-step circle `bg-blue-500/20 border-2 border-blue-500 ring-4 ring-blue-500/20` → `bg-signal/15 border-2 border-signal ring-4 ring-signal/10` (hierarchy preserved: ring softer than border = active-but-not-luminous)
+4. `:320` — current-step icon `text-blue-400` → `text-signal`
+5. `:399` — HelpCircle `text-blue-400` → `text-signal`
+6. `:407` — help button `bg-blue-500/20 hover:bg-blue-500/30 text-blue-400` → `bg-signal/15 hover:bg-signal/20 text-signal`
+7. `:628` — resource chip `bg-blue-500/10 hover:bg-blue-500/20 text-blue-400` → `bg-signal/10 hover:bg-signal/15 text-signal`
+8. `:672` — textarea `focus:border-blue-500/50` → `focus:border-signal/40` (focus stays slightly more present than passive border, but not glow)
+9. `:904-909` — entire "Next Step" block: `bg-blue-500/5 border border-blue-500/20` outer + `bg-blue-500/20` icon container + ChevronRight + NEXT STEP label → all `bg-signal/10`, `border-signal/20`, `bg-signal/15`, `text-signal`
+
+`ClientProjectWorkspaceOS.js` (6 edits):
+10. `:103` — `getStatusColor` active state `bg-blue-500/20 text-blue-400` → `bg-signal/15 text-signal`
+11. `:163` — Modules section Package icon `text-blue-400` → `text-signal`
+12. `:188` — ETA pill `text-blue-400` → `text-signal`
+13. `:218` — per-module progress bar inner fill `bg-blue-500` → `bg-signal` (single restrained signal, no gradient, no animation)
+14. `:262` — Preview link `text-blue-400 hover:text-blue-300` → `text-signal hover:text-signal/80`
+15. `:316` — timeline qa-event dot `bg-blue-400` → `bg-signal`
+
+**Architectural decisions reinforced:**
+- **Interaction hierarchy:** for active/focus states use `ring-signal/10` (or softer than its companion `border-signal`) — so focus reads as more present than passive border but never crosses into luminous glow.
+- **Progress bars** universally `bg-signal` (no `from-… to-…`, no animation, no gradient).
+- **Hover transitions** for blue→signal links: `hover:text-signal/80` (slight softening) — preserves the "interactive" cue without re-introducing brightness.
+
+**Verified by final substrate-grep across all 8 named client surfaces:**
+
+| File | Blue refs |
+|------|-----------|
+| ClientCabinet.js | 0 |
+| ClientLayout.js | 0 |
+| ClientProjectWorkspaceOS.js | 0 |
+| **ClientProjectPage.js** | **7** (lines 1029, 1031, 1032, 1040, 1287, 1294, 1295 — `state-idea-submitted` + StatusBadge color dictionary — NOT in 1.5c listed scope) |
+| ClientDashboard.js | 7 |
+| ClientDashboardOS.js | 9 |
+| ClientHub.js | 12 |
+| ClientEstimatePage.js | 1 |
+| **TOTAL outside 1.5c scope** | **36** |
+
+**Web rebuild:** ✅ 496.64 kB JS, 23.66 kB CSS, clean compile.
+
+**Open architectural question before Phase 2:**
+PRD Phase 1.5 had originally claimed Dashboard / DashboardOS / Hub / Estimate
+"cleaned by regex sweep". Final substrate-grep shows 29 blue refs remain
+across those four files (plus 7 in PP's idea-state block). These are the
+same-class dialect leaks. Per user's own principle —
+`dialect breach ≠ infrastructure debt; cannot be deferred to Phase 3` —
+they MUST be either:
+  (a) closed via Phase 1.5d surgical pass before Phase 2 opens, or
+  (b) explicitly acknowledged as in-flight grammar with documented risk.
+Awaiting decision.
+
 ## Access points (current pod)
 - Mobile (Expo Web): https://ca52717f-8dc0-4c64-82ad-8435338baff8.preview.emergentagent.com/
 - Web platform: https://ca52717f-8dc0-4c64-82ad-8435338baff8.preview.emergentagent.com/api/web-ui/

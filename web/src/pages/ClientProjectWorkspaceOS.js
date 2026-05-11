@@ -100,7 +100,7 @@ const ClientProjectWorkspaceOS = () => {
   const getStatusColor = (status) => {
     const colors = {
       pending: 'bg-gray-500/20 text-gray-400',
-      active: 'bg-blue-500/20 text-blue-400',
+      active: 'bg-signal/15 text-signal',
       submitted: 'bg-purple-500/20 text-purple-400',
       qa_done: 'bg-green-500/20 text-green-400',
       done: 'bg-green-600/20 text-green-500',
@@ -160,7 +160,7 @@ const ClientProjectWorkspaceOS = () => {
           {/* Modules */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Package className="w-5 h-5 text-blue-400" />
+              <Package className="w-5 h-5 text-signal" />
               <h2 className="text-lg font-semibold text-white">Modules</h2>
             </div>
 
@@ -185,7 +185,7 @@ const ClientProjectWorkspaceOS = () => {
                           </div>
                         )}
                         {module.eta_days !== null && module.eta_days !== undefined && (
-                          <div className="flex items-center gap-1 text-xs text-blue-400">
+                          <div className="flex items-center gap-1 text-xs text-signal">
                             <Clock className="w-3 h-3" />
                             ETA: {module.eta_days}d
                           </div>
@@ -215,7 +215,7 @@ const ClientProjectWorkspaceOS = () => {
                     </div>
                     <div className="h-1 bg-white/5 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-blue-500 transition-all"
+                        className="h-full bg-signal transition-all"
                         style={{ width: `${module.progress}%` }}
                       />
                     </div>
@@ -259,7 +259,7 @@ const ClientProjectWorkspaceOS = () => {
                         href={deliverable.preview_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm mb-3 transition-colors"
+                        className="flex items-center gap-2 text-signal hover:text-signal/80 text-sm mb-3 transition-colors"
                       >
                         <ExternalLink className="w-4 h-4" />
                         Preview
@@ -313,7 +313,7 @@ const ClientProjectWorkspaceOS = () => {
                       <div
                         className={`w-2 h-2 rounded-full ${
                           event.type === 'qa'
-                            ? 'bg-blue-400'
+                            ? 'bg-signal'
                             : event.type === 'submission'
                             ? 'bg-green-400'
                             : 'bg-purple-400'

@@ -251,7 +251,7 @@ const ClientProjectPage = () => {
         {/* Next Step */}
         {isActive && (
           <div className="flex items-center gap-2 text-sm">
-            <ArrowRight className="w-4 h-4 text-blue-400" />
+            <ArrowRight className="w-4 h-4 text-signal" />
             <span className="text-white/70">Next:</span>
             <span className="text-white font-medium">
               {deliverables.filter(d => d.status === 'pending_approval').length > 0 
@@ -284,7 +284,7 @@ const ClientProjectPage = () => {
       {/* ============ TIMELINE ============ */}
       <div className="rounded-2xl border border-white/10 bg-[#151922] p-6" data-testid="project-timeline">
         <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <Activity className="w-5 h-5 text-blue-400" />
+          <Activity className="w-5 h-5 text-signal" />
           Project Timeline
         </h2>
         <div className="flex items-center justify-between">
@@ -311,13 +311,13 @@ const ClientProjectPage = () => {
                   {/* Circle */}
                   <div className={`relative mx-auto w-10 h-10 rounded-full flex items-center justify-center z-10 ${
                     isDone ? 'bg-emerald-500/20 border-2 border-emerald-500' :
-                    isCurrent ? 'bg-blue-500/20 border-2 border-blue-500 ring-4 ring-blue-500/20' :
+                    isCurrent ? 'bg-signal/15 border-2 border-signal ring-4 ring-signal/10' :
                     'bg-white/5 border-2 border-white/20'
                   }`}>
                     {isDone ? (
                       <CheckCircle2 className="w-5 h-5 text-emerald-400" />
                     ) : (
-                      <Icon className={`w-5 h-5 ${isCurrent ? 'text-blue-400' : 'text-white/30'}`} />
+                      <Icon className={`w-5 h-5 ${isCurrent ? 'text-signal' : 'text-white/30'}`} />
                     )}
                   </div>
                 </div>
@@ -396,7 +396,7 @@ const ClientProjectPage = () => {
           {/* Support Block */}
           <div className="rounded-2xl border border-white/10 bg-[#151922] p-6" data-testid="support-block">
             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <HelpCircle className="w-5 h-5 text-blue-400" />
+              <HelpCircle className="w-5 h-5 text-signal" />
               Need Help?
             </h3>
             <p className="text-sm text-white/50 mb-4">
@@ -404,7 +404,7 @@ const ClientProjectPage = () => {
             </p>
             <Link
               to="/client/support"
-              className="w-full py-3 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
+              className="w-full py-3 bg-signal/15 hover:bg-signal/20 text-signal font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
               data-testid="create-ticket-btn"
             >
               <MessageCircle className="w-4 h-4" />
@@ -625,7 +625,7 @@ const DeliverableCard = ({ deliverable, onRefresh }) => {
                     href={resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 text-sm transition-colors"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-signal/10 hover:bg-signal/15 text-signal text-sm transition-colors"
                   >
                     {getResourceIcon(resource.resource_type)}
                     {resource.title}
@@ -669,7 +669,7 @@ const DeliverableCard = ({ deliverable, onRefresh }) => {
                     value={feedback}
                     onChange={(e) => setFeedback(e.target.value)}
                     placeholder="What changes would you like to see?"
-                    className="w-full h-24 bg-black/30 border border-white/10 rounded-xl p-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-blue-500/50"
+                    className="w-full h-24 bg-black/30 border border-white/10 rounded-xl p-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-signal/40"
                     data-testid="feedback-textarea"
                   />
                   <div className="flex gap-3">
@@ -901,12 +901,12 @@ const ProductionWorkspace = ({ workspace, project }) => {
       )}
 
       {/* Next Step */}
-      <div className="mt-4 p-4 rounded-xl bg-blue-500/5 border border-blue-500/20 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-          <ChevronRight className="w-4 h-4 text-blue-400" />
+      <div className="mt-4 p-4 rounded-xl bg-signal/10 border border-signal/20 flex items-center gap-3">
+        <div className="w-8 h-8 rounded-lg bg-signal/15 flex items-center justify-center flex-shrink-0">
+          <ChevronRight className="w-4 h-4 text-signal" />
         </div>
         <div>
-          <div className="text-xs text-blue-400 font-medium">NEXT STEP</div>
+          <div className="text-xs text-signal font-medium">NEXT STEP</div>
           <div className="text-sm text-white/80">{next_step}</div>
         </div>
       </div>
